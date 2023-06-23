@@ -1,11 +1,10 @@
-// import Button from "@/components/Button/Button";
-
+import Tab from '@/components/Tab/Tab'
 
 export default function Home() {
   return (
-    <div>    
-  
-  </div>
+    <>    
+       <Tab/>
+    </>
 
   )
 }

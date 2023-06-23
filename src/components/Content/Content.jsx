@@ -12,6 +12,7 @@ const Content = ({ activeTab, setActiveTab }) => {
     universityName: "",
     depName: "",
   });
+  const [submitting, setSubmitting] = useState(false)
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -43,6 +44,7 @@ const Content = ({ activeTab, setActiveTab }) => {
   };
 
   const handleSubmit = async (e) => {
+    setSubmitting(true);
     e.preventDefault();
     const name = formData.name;
     const phoneNumber = formData.phoneNumber;
@@ -70,18 +72,23 @@ const Content = ({ activeTab, setActiveTab }) => {
       });
 
       if (!response.ok) {
+        setSubmitting(false)
         throw new Error("Request failed with status: " + response.status);
       } else {
+        setSubmitting(false)
+        // submitStatus("Form Submittied")
         handleCancel();
       }
     } catch (error) {
+      setSubmitting(false)
       console.error(error);
     }
   };
 
   return (
-    <>
-      <div className="flex text-start justify-center mt-16">
+    <div className="flex-1">
+
+      <div className="flex  text-start justify-center mt-16">
         <form onSubmit={handleSubmit}>
           {activeTab === 0 && (
             <div>
@@ -197,13 +204,15 @@ const Content = ({ activeTab, setActiveTab }) => {
               <div className="flex justify-start mb-4">
                 <Button text="Back" onClick={handleBackClick} />
                 <Button text="Cancel" onClick={handleCancel} />
-                <Button text="Save" />
+                <Button text={`${submitting? "Loading..." : "Save"}`} />
               </div>
             </div>
           )}
         </form>
       </div>
-    </>
+
+      {/* <p className="text-center p-6  italic text-green-500">{submitStatus}</p> */}
+    </div>
   );
 };
 

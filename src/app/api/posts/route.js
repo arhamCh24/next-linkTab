@@ -14,6 +14,7 @@ export const POST = async (request) => {
   try {
     await connect();
 
+    // await body.save();
     await newPost.save();
     // console.log("Saved");
     return new NextResponse("Post has been created", { status: 201 });
@@ -22,3 +23,6 @@ export const POST = async (request) => {
     return new NextResponse("Database Error", { status: 500 });
   }
 };
+
+
+

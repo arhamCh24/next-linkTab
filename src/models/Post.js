@@ -1,5 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
+
 const postSchema = new Schema({
   name: {
     type: String,
@@ -36,6 +37,13 @@ const postSchema = new Schema({
     required: true,
     
   },
+  // uploadFile: {
+  //   type: String, 
+  // },
+  uploadFile: {
+    type: [String], // Updated to store an array of strings
+  },
+  
 });
 
 const Post = models.Post || model("Post",postSchema)
